@@ -1,0 +1,28 @@
+package com.digitalinnovation.one.PersonAPI_bootcamp.utils;
+
+import com.digitalinnovation.one.PersonAPI_bootcamp.dto.request.PhoneDTO;
+import com.digitalinnovation.one.PersonAPI_bootcamp.entity.Phone;
+import com.digitalinnovation.one.PersonAPI_bootcamp.enums.PhoneType;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+public class PhoneUtils {
+
+    private static final String PHONE_NUMBER = "1199999-9999";
+    private static final PhoneType PHONE_TYPE = PhoneType.MOBILE;
+    private static final long PHONE_ID = 1L;
+
+    public static PhoneDTO createFakeDTO() {
+        return PhoneDTO.builder()
+                .number(PHONE_NUMBER)
+                .type(PHONE_TYPE)
+                .build();
+    }
+
+    public static Phone createFakeEntity() {
+        return Phone.builder()
+                .id(PHONE_ID)
+                .number(PHONE_NUMBER)
+                .type(PHONE_TYPE)
+                .build();
+    }
+}
