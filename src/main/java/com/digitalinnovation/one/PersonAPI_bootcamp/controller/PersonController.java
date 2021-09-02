@@ -2,11 +2,8 @@ package com.digitalinnovation.one.PersonAPI_bootcamp.controller;
 
 import com.digitalinnovation.one.PersonAPI_bootcamp.dto.request.PersonDTO;
 import com.digitalinnovation.one.PersonAPI_bootcamp.dto.response.MessageResponseDTO;
-import com.digitalinnovation.one.PersonAPI_bootcamp.entity.Person;
 import com.digitalinnovation.one.PersonAPI_bootcamp.exception.PersonNotFoundException;
-import com.digitalinnovation.one.PersonAPI_bootcamp.repository.PersonRepository;
 import com.digitalinnovation.one.PersonAPI_bootcamp.service.PersonService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +36,11 @@ public class PersonController {
     @GetMapping("/{id}")
     public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
         return personService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody @Valid PersonDTO personDTO) throws PersonNotFoundException {
+        return personService.updateById(id, personDTO);
     }
 
     @DeleteMapping("/{id}")

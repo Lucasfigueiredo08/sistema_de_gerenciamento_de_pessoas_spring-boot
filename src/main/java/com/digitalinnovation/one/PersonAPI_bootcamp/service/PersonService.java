@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,10 +36,7 @@ public class PersonService {
         Person personToSave = personMapper.toModel(personDTO);
 
         Person savedPerson = personRepository.save(personToSave);
-        return MessageResponseDTO
-                .builder()
-                .message("Created Person with Id " + savedPerson.getId())
-                .build();
+        return createMessageResponse(savedPerson.getId(), "Created person with id ");
     }
 
     public List<PersonDTO> listAll() {
@@ -56,6 +54,8 @@ public class PersonService {
     }
 
 
+
+
     public void delete(Long id) throws PersonNotFoundException {
         personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
@@ -63,8 +63,26 @@ public class PersonService {
         personRepository.deleteById(id);
     }
 
+
+
+    public MessageResponseDTO updateById(Long id, PersonDTO personDTO) throws PersonNotFoundException {
+        verifyIfExists(id);
+
+        Person personToSave = personMapper.toModel(personDTO);
+
+        Person updatedPerson = personRepository.save(personToSave);
+        return createMessageResponse(updatedPerson.getId(), "Updated person with ID ");
+    }
+
     private Person verifyIfExists(Long id) throws PersonNotFoundException {
         return personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
+    }
+
+    private MessageResponseDTO createMessageResponse (Long id, String message) {
+        return MessageResponseDTO
+                .builder()
+                .message(message + id)
+                .build();
     }
 }
