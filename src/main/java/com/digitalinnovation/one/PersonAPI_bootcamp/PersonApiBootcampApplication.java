@@ -1,0 +1,13 @@
+package com.digitalinnovation.one.PersonAPI_bootcamp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class PersonApiBootcampApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PersonApiBootcampApplication.class, args);
+	}
+
+}
