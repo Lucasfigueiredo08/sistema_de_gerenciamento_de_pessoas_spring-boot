@@ -6,6 +6,7 @@ import com.digitalinnovation.one.PersonAPI_bootcamp.entity.Person;
 import com.digitalinnovation.one.PersonAPI_bootcamp.exception.PersonNotFoundException;
 import com.digitalinnovation.one.PersonAPI_bootcamp.mapper.PersonMapper;
 import com.digitalinnovation.one.PersonAPI_bootcamp.repository.PersonRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,16 +21,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
 
     private PersonRepository personRepository;
 
     private final PersonMapper  personMapper = PersonMapper.INSTANCE;
-
-    @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
 
     public MessageResponseDTO createPerson(PersonDTO personDTO){
 
