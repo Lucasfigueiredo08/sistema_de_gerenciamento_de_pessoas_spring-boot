@@ -17,7 +17,7 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public MessageResponseDTO createPerson( Person person){
+    public MessageResponseDTO createPerson(Person person){
         Person savedPerson = personRepository.save(person);
         return MessageResponseDTO
                 .builder()
